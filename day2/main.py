@@ -48,18 +48,23 @@ if __name__ == '__main__':
 
         is_game_possible = True
 
+        MAX_RED_COUNT = 0
+        MAX_BLUE_COUNT = 0
+        MAX_GREEN_COUNT = 0
+
         for pull in game_rolls:
 
-            if not(pull['red'] <= MAX_RED and pull['blue'] <= MAX_BLUE and pull['green'] <= MAX_GREEN):
+            if pull['red'] > MAX_RED_COUNT:
+                MAX_RED_COUNT = pull['red']
 
-                is_game_possible = False
-                break
+            if pull['green'] > MAX_BLUE_COUNT:
+                MAX_BLUE_COUNT = pull['green']
 
-        if is_game_possible:
+            if pull['blue'] > MAX_GREEN_COUNT:
+                MAX_GREEN_COUNT = pull['blue']
 
-            game_sum += int(game_number.split()[1])
+        print(MAX_RED_COUNT, MAX_GREEN_COUNT, MAX_BLUE_COUNT, '|| POWER: ', str(MAX_RED_COUNT * MAX_GREEN_COUNT * MAX_BLUE_COUNT))
 
-        print(is_game_possible)
-        #exit(0)
+        game_sum += MAX_RED_COUNT * MAX_GREEN_COUNT * MAX_BLUE_COUNT
 
-    print(game_sum)
+print(game_sum)
